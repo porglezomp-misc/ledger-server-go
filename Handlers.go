@@ -13,12 +13,11 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func EntryIndex(w http.ResponseWriter, r *http.Request) {
-	entries := Entries{
-		Entry{From: "me", To: "you"},
-		Entry{From: "you", To: "me"},
+	w.Header().Set("Content-Type", "application/json;charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(entries); err != nil {
+		panic(err)
 	}
-
-	json.NewEncoder(w).Encode(entries)
 }
 
 func EntryShow(w http.ResponseWriter, r *http.Request) {
