@@ -5,11 +5,15 @@ import (
 )
 
 type Entry struct {
-	Id     int       `json:"id"`
-	From   string    `json:"from"`
-	To     string    `json:"to"`
-	On     time.Time `json:"on"`
-	Amount string    `json:"amount"`
+	Id      int           `json:"id"`
+	On      *time.Time    `json:"on"`
+	Name    string        `json:"name"`
+	Actions []Transaction `json:"actions"`
+}
+
+type Transaction struct {
+	Account string `json:"account"`
+	Amount  string `json:"amount"`
 }
 
 type Entries []Entry

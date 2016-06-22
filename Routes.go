@@ -32,4 +32,10 @@ var routes = Routes{
 		"/entries/{entryId}",
 		EntryShow,
 	},
+	Route{
+		"EntryCreate",
+		"POST",
+		"/entries",
+		EntryCreate,
+	},
 }

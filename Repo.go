@@ -2,13 +2,20 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 var currentId int
 var entries Entries
 
 func init() {
-	RepoCreateEntry(Entry{From: "you", To: "me", Amount: "$20"})
+	RepoCreateEntry(Entry{
+		Name: "Wow Food",
+		Actions: []Transaction{
+			Transaction{Account: "expenses:food:dining", Amount: "$20.00"},
+			Transaction{Account: "assets:bank:checking", Amount: ""},
+		},
+	})
 }
 
 func RepoFindEntry(id int) Entry {
@@ -21,6 +28,11 @@ func RepoFindEntry(id int) Entry {
 }
 
 func RepoCreateEntry(e Entry) Entry {
+	if e.On == nil {
+		time := time.Now()
+		e.On = &time
+	}
+
 	currentId += 1
 	e.Id = currentId
 	entries = append(entries, e)
